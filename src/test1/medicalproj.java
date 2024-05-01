@@ -2,6 +2,12 @@ package test1;
 
 import java.awt.EventQueue;
 
+import javax.swing.JOptionPane;
+import java.sql.*;
+import javax.swing.JComboBox;
+
+
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,21 +17,30 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Frame;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JRadioButton;
+import javax.swing.JTextPane;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JScrollPane;
 
 public class medicalproj extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtusername;
+	private JTextField txtUsername;
 	JLabel lblinfo;
 	private JPasswordField txtPassword;
 	private JLabel lblNewLabel_2;
+	
+	private JRadioButton button1;
+    private JRadioButton button2;
 
 	/**
 	 * Launch the application.
@@ -43,6 +58,12 @@ public class medicalproj extends JFrame {
 		});
 	}
 
+	
+	
+	
+	
+	
+	
 	/**
 	 * Create the frame.
 	 */
@@ -63,37 +84,95 @@ public class medicalproj extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Mot de passe");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_1.setBounds(72, 154, 113, 19);
+		lblNewLabel_1.setBounds(84, 131, 113, 19);
 		contentPane.add(lblNewLabel_1);
 		
-		txtusername = new JTextField();
-		txtusername.setFont(new Font("Tahoma", Font.BOLD, 14));
-		txtusername.setBounds(274, 62, 217, 20);
-		contentPane.add(txtusername);
-		txtusername.setColumns(10);
+		txtUsername = new JTextField();
+		txtUsername.setFont(new Font("Tahoma", Font.BOLD, 14));
+		txtUsername.setBounds(274, 62, 217, 20);
+		contentPane.add(txtUsername);
+		txtUsername.setColumns(10);
 		
-		JButton btnok = new JButton("Login");
+		button1 = new JRadioButton("medecin");
+        button1.setBounds(367, 197, 111, 23);
+        contentPane.add(button1);
+        
+        button2 = new JRadioButton("secraitaire");
+        button2.setBounds(178, 197, 111, 23);
+        contentPane.add(button2);
+		
+		JButton btnok = new JButton("Se Connecter");
 		btnok.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String Password = txtPassword.getText();
-				String username = txtusername.getText();
-				if (Password.contains("king") && username.contains("one")) {
-					txtPassword.setText(null);
-					txtusername.setText(null);
-				}
-				else {
-					JOptionPane.showMessageDialog(null,"invalid login","login error",JOptionPane.ERROR_MESSAGE);
-					txtPassword.setText(null);
-					txtusername.setText(null);
-				}
+				String username = txtUsername.getText ();
+	        	String password = txtPassword.getText ();
+	        	String utype = "";
+	        	if (button2.isSelected()) {
+	                utype = "secraitaire";
+	            } else if ( button1.isSelected()) {
+	                utype = "medecin";
+	            } else {
+	         
+	                JOptionPane.showMessageDialog(null, "Please select user type");
+	                return; 
+	            }
+			        	
+			        	
+				try {
 				
+		        	
+		        	
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","lydia");
+					PreparedStatement ps = con.prepareStatement("select *from createcompte where Nomutilisateur=? and Motdepasse=? and TypeUtilisateur= ? ");
+					ps.setString(1, username);
+					ps.setString(2, password);
+					ps.setString(3, utype);
+					
+					ResultSet rs;
+					rs = ps.executeQuery();
+					if (rs.next() )
+					{
+						int userid = rs.getInt("ID");
+						setVisible(false);
+						if (utype.equals("secraitaire")) {
+		                    Main2 main2 = new Main2(userid, username,utype );
+		                    main2.setVisible(true);
+		                } else {
+		                    // Ouvrir Main sinon
+		                    Main main = new Main(userid, username, utype);
+		                    main.setVisible(true);
+		                }
+						
+						
+						 
+					}
+					else 
+					{
+						JOptionPane.showMessageDialog(null, "userName or password do not match");
+						txtUsername.setText("");
+						txtPassword.setText("");
+						
+						txtUsername.requestFocus();
+					}
+					
+		    	  
+		    	  
+		    	  
+		      
+				
+				
+	
+				} catch(Exception e1) {
+					  e1.printStackTrace();
+					}
 			}
 		});
-		btnok.setBounds(106, 282, 89, 23);
+		btnok.setBounds(106, 282, 135, 48);
 		contentPane.add(btnok);
 		
-		JButton btnreset = new JButton("close ");
+		JButton btnreset = new JButton("Fermer");
 		btnreset.setIcon(new ImageIcon("C:\\Users\\pc\\OneDrive\\Documents\\photopro\\Close.png"));
 		btnreset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -104,7 +183,7 @@ public class medicalproj extends JFrame {
 			}
 		});
 		btnreset.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnreset.setBounds(411, 282, 108, 23);
+		btnreset.setBounds(468, 285, 135, 43);
 		contentPane.add(btnreset);
 		
 	    lblinfo = new JLabel("");
@@ -112,11 +191,32 @@ public class medicalproj extends JFrame {
 		contentPane.add(lblinfo);
 		
 		txtPassword = new JPasswordField();
-		txtPassword.setBounds(274, 155, 217, 20);
+		txtPassword.setBounds(274, 130, 217, 20);
 		contentPane.add(txtPassword);
 		
 		lblNewLabel_2 = new JLabel("login system");
-		lblNewLabel_2.setBounds(231, 26, 101, 14);
+		lblNewLabel_2.setBounds(274, 22, 101, 14);
 		contentPane.add(lblNewLabel_2);
+		
+		JButton btnNewButton = new JButton("Creer un compte");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			Compte create=new Compte();
+			create.setVisible(true);
+				
+			
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnNewButton.setBounds(274, 297, 164, 33);
+		contentPane.add(btnNewButton);
+		
+		JRadioButton button1 = new JRadioButton("medecin");
+		button1.setBounds(367, 197, 111, 23);
+		contentPane.add(button1);
+		
+		JRadioButton button2 = new JRadioButton("secraitaire");
+		button2.setBounds(178, 197, 111, 23);
+		contentPane.add(button2);
 	}
 }
