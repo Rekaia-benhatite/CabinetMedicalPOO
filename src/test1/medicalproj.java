@@ -183,7 +183,7 @@ public class medicalproj extends JFrame {
 			}
 		});
 		btnreset.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnreset.setBounds(468, 285, 135, 43);
+		btnreset.setBounds(465, 285, 135, 43);
 		contentPane.add(btnreset);
 		
 	    lblinfo = new JLabel("");
