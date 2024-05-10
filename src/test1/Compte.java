@@ -79,12 +79,12 @@ public class Compte extends JFrame {
 		passwordComp.setBounds(338, 217, 265, 32);
 		Create.add(passwordComp);
 		
-		JRadioButton rdbtnmed = new JRadioButton("Medecin");
+		final JRadioButton rdbtnmed = new JRadioButton("Medecin");
 		rdbtnmed.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 17));
 		rdbtnmed.setBounds(164, 300, 127, 23);
 		Create.add(rdbtnmed);
 		
-		JRadioButton rdbtnSecraitaire = new JRadioButton("Secraitaire");
+		final JRadioButton rdbtnSecraitaire = new JRadioButton("Secraitaire");
 		rdbtnSecraitaire.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 17));
 		rdbtnSecraitaire.setBounds(401, 300, 139, 23);
 		Create.add(rdbtnSecraitaire);
@@ -101,7 +101,7 @@ public class Compte extends JFrame {
 				
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","lydia");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","koukikouki");
 					String query="insert into createcompte (Nomutilisateur, Motdepasse, TypeUtilisateur) values (?,?,?)";
 					PreparedStatement ps=con.prepareStatement(query);
 					ps.setString(1, txtutilisateur.getText());

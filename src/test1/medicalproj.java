@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JOptionPane;
 import java.sql.*;
+import java.util.Map;
+
 import javax.swing.JComboBox;
 
 
@@ -124,7 +126,7 @@ public class medicalproj extends JFrame {
 		        	
 		        	
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","lydia");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","ikoukikouk");
 					PreparedStatement ps = con.prepareStatement("select *from createcompte where Nomutilisateur=? and Motdepasse=? and TypeUtilisateur= ? ");
 					ps.setString(1, username);
 					ps.setString(2, password);
@@ -136,12 +138,12 @@ public class medicalproj extends JFrame {
 					{
 						int userid = rs.getInt("ID");
 						setVisible(false);
-						if (utype.equals("secraitaire")) {
+						if (utype.equals("Secraitaire")) {
 		                    Main2 main2 = new Main2(userid, username,utype );
 		                    main2.setVisible(true);
 		                } else {
 		                    // Ouvrir Main sinon
-		                    Main main = new Main(userid, username, utype);
+		                	SaisieIDPatient main = new SaisieIDPatient();
 		                    main.setVisible(true);
 		                }
 						
@@ -194,7 +196,7 @@ public class medicalproj extends JFrame {
 		txtPassword.setBounds(274, 130, 217, 20);
 		contentPane.add(txtPassword);
 		
-		lblNewLabel_2 = new JLabel("login system");
+		lblNewLabel_2 = new JLabel("LOGIN SYSTEM");
 		lblNewLabel_2.setBounds(274, 22, 101, 14);
 		contentPane.add(lblNewLabel_2);
 		
@@ -207,15 +209,15 @@ public class medicalproj extends JFrame {
 			
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton.setBounds(274, 297, 164, 33);
 		contentPane.add(btnNewButton);
 		
-		JRadioButton button1 = new JRadioButton("medecin");
+		JRadioButton button1 = new JRadioButton("Medecin");
 		button1.setBounds(367, 197, 111, 23);
 		contentPane.add(button1);
 		
-		JRadioButton button2 = new JRadioButton("secraitaire");
+		JRadioButton button2 = new JRadioButton("Secraitaire");
 		button2.setBounds(178, 197, 111, 23);
 		contentPane.add(button2);
 	}
