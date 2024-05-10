@@ -141,6 +141,12 @@ public class Compte extends JFrame {
 		JButton btnQuitter = new JButton("Quitter");
 		btnQuitter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				  medicalproj medicalprojFrame = new medicalproj();
+			        // Affichage de medicalproj
+			        medicalprojFrame.setVisible(true);
+			        // Fermeture de la fenêtre actuelle de Compte
+			        dispose();
 			}
 		});
 		btnQuitter.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 17));

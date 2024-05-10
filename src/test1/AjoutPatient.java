@@ -95,7 +95,11 @@ public class AjoutPatient extends JFrame {
 		lblAnticdents.setBounds(56, 452, 142, 27);
 		lblAnticdents.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 21));
 		contentPane.add(lblAnticdents);
+<<<<<<< HEAD
 		final JLabel NumPat = new JLabel("");
+=======
+		JLabel NumPat = new JLabel("");
+>>>>>>> 74d1999449570a069c5df1a48dfd8d8f09e29f23
 		NumPat.setBounds(367, 63, 151, 20);
 		contentPane.add(NumPat);
 		
@@ -136,12 +140,20 @@ public class AjoutPatient extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
 		contentPane.add(btnNewButton);
 		
+<<<<<<< HEAD
 		final JButton Ajoutpat = new JButton("Ajouter");
+=======
+		JButton Ajoutpat = new JButton("Ajouter");
+>>>>>>> 74d1999449570a069c5df1a48dfd8d8f09e29f23
 		Ajoutpat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
+<<<<<<< HEAD
 					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","koukikouki");
+=======
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","lydia");
+>>>>>>> 74d1999449570a069c5df1a48dfd8d8f09e29f23
 					String query="insert into patient (Nom, Prénom, Age,Numérotel,Anticédents) values (?,?,?,?,?)";
 					
 					String nom = Nomtext.getText ();
@@ -189,7 +201,11 @@ public class AjoutPatient extends JFrame {
         		
         		try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
+<<<<<<< HEAD
 					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","koukikouki");
+=======
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","lydia");
+>>>>>>> 74d1999449570a069c5df1a48dfd8d8f09e29f23
 					String query="update patient set Nom = ?, Prénom = ?, Age= ?, Numérotel = ?, Anticédents = ? where `Patient ID`= ?";
 					
 					String nom = Nomtext.getText ();
@@ -222,6 +238,15 @@ public class AjoutPatient extends JFrame {
 				} catch(Exception e1) {
 					  e1.printStackTrace();}
 			}
+<<<<<<< HEAD
+=======
+        
+        		
+        		
+        		
+        		
+        		
+>>>>>>> 74d1999449570a069c5df1a48dfd8d8f09e29f23
         	
         });
         btnModifier.setBounds(461, 630, 151, 40);
@@ -235,7 +260,11 @@ public class AjoutPatient extends JFrame {
         		
         		try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
+<<<<<<< HEAD
 					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","koukikouki");
+=======
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","lydia");
+>>>>>>> 74d1999449570a069c5df1a48dfd8d8f09e29f23
 					String query="delete from patient where `Patient ID`= ?";
 					
 					
@@ -294,7 +323,11 @@ public class AjoutPatient extends JFrame {
         		    } else {
         		        // Gérer le cas où aucun élément n'est sélectionné
         		    }
+<<<<<<< HEAD
        		}
+=======
+        		}
+>>>>>>> 74d1999449570a069c5df1a48dfd8d8f09e29f23
         	
         });
         scrollPane.setBounds(515, 66, 648, 522);
@@ -326,7 +359,11 @@ public class AjoutPatient extends JFrame {
 	public void patient_table() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
+<<<<<<< HEAD
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical", "root", "koukikouki");
+=======
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical", "root", "lydia");
+>>>>>>> 74d1999449570a069c5df1a48dfd8d8f09e29f23
             PreparedStatement ps = con.prepareStatement("select * from patient");
             ResultSet rs = ps.executeQuery();
             ResultSetMetaData Rsm = rs.getMetaData();
