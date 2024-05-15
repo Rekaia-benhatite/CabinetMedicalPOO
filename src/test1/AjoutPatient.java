@@ -321,7 +321,7 @@ public class AjoutPatient extends JFrame {
 		lblId.setBounds(56, 63, 76, 27);
 		contentPane.add(lblId);
 		
-		JTextArea Antitxt = new JTextArea();
+	    Antitxt = new JTextArea();
 		Antitxt.setBounds(231, 457, 235, 114);
 		contentPane.add(Antitxt);
 		

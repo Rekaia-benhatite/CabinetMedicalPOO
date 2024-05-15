@@ -2,6 +2,7 @@ package test1;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -29,6 +30,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
+import java.sql.ResultSet;
 
 public class InfoMed extends JFrame {
 
@@ -40,10 +42,17 @@ public class InfoMed extends JFrame {
 	private JTextField numtelmed;
 	private JTextField adrmedtxt;
 	private JTextField spémedtxt;
+	private int idUtilisateur;
+	
 
+
+	
 	/**
 	 * Launch the application.
 	 */
+	
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -60,7 +69,15 @@ public class InfoMed extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InfoMed() {
+	
+	
+	
+
+	
+	
+	public InfoMed( ) {
+		
+	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 995, 737);
 		contentPane = new JPanel();
@@ -134,6 +151,12 @@ public class InfoMed extends JFrame {
 		lblNewLabel_1.setBounds(361, 26, 368, 28);
 		contentPane.add(lblNewLabel_1);
 		
+		
+		
+		
+		
+		
+		
 		JButton quittermed = new JButton("Quitter");
 		quittermed.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
 		quittermed.addActionListener(new ActionListener() {
@@ -150,14 +173,30 @@ public class InfoMed extends JFrame {
 		quittermed.setBounds(290, 627, 137, 45);
 		contentPane.add(quittermed);
 		
+		 
+		
+		
+		
+		
+		
+		
 		JButton creermed = new JButton("Créer");
 		creermed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 
 				try {
+					 
+										
+					
+					
+					
+					
+		
+					
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","lydia");
-					String query="insert into medecin (nom, Prénom,email,numtel, adresse,spécialité) values (?,?,?,?,?,?)";
+					
+					String query="insert into medecin (nom, Prenom,email,numtel, adresse,spécialité,idutilisateur) values (?,?,?,?,?,?,?)";
 					
 					String nommed = Nommedtxt.getText ();
 					String prenommed = prenmedtxt.getText ();
@@ -174,6 +213,8 @@ public class InfoMed extends JFrame {
 					ps.setString(4,nultelmed);
 					ps.setString(5,adressemed );
 					ps.setString(6,specialité  );
+					ps.setInt(7, idUtilisateur);
+			
 					 ps.executeUpdate();
                     
 					
@@ -195,5 +236,14 @@ public class InfoMed extends JFrame {
 		creermed.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
 		creermed.setBounds(537, 627, 137, 45);
 		contentPane.add(creermed);
+		
+	
+		
 	}
+	
+	  public InfoMed(int idUtilisateur) {
+	        this(); // Appel au constructeur par défaut pour initialiser l'interface
+	        this.idUtilisateur = idUtilisateur;
+	    }
+	
 }

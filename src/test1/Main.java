@@ -7,6 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Main extends JFrame {
 
@@ -51,6 +55,18 @@ public class Main extends JFrame {
 		 jlabel5 = new JLabel("New label");
 		jlabel5.setBounds(806, 190, 49, 14);
 		contentPane.add(jlabel5);
+		
+		JButton btnNewButton = new JButton("rendezvous");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				rendezvousmed rendezvousMedFrame = new rendezvousmed(newid);
+		        rendezvousMedFrame.setVisible(true);
+				
+			}
+		});
+		btnNewButton.setBounds(215, 134, 89, 23);
+		contentPane.add(btnNewButton);
 	}
 	int newid;
 	String uname;
@@ -64,7 +80,9 @@ public class Main extends JFrame {
 		jlabel5.setText(usertype);
 		this.newid= id;
 		
+		
+		
+		
+		
 	}
-	
-	
 }

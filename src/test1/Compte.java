@@ -25,6 +25,7 @@ public class Compte extends JFrame {
 	private JPanel Create;
 	private JTextField txtutilisateur;
 	private JPasswordField passwordComp;
+	private int idUtilisateur;
 
 	/**
 	 * Launch the application.
@@ -93,17 +94,14 @@ public class Compte extends JFrame {
 		btnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				 if (rdbtnmed.isSelected()) {
-  // Médecin sélectionné, ouvrir la fenêtre d'informations du médecin (infodoc)
-				        InfoMed infodoc = new InfoMed();
-				        infodoc.setVisible(true);
-				 }
+		
 				
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","lydia");
 					String query="insert into createcompte (Nomutilisateur, Motdepasse, TypeUtilisateur) values (?,?,?)";
-					PreparedStatement ps=con.prepareStatement(query);
+					
+					PreparedStatement ps=con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
 					ps.setString(1, txtutilisateur.getText());
 					ps.setInt(2, Integer.parseInt(passwordComp.getText()));
 					
@@ -112,12 +110,49 @@ public class Compte extends JFrame {
 					else
 						ps.setString(3,rdbtnSecraitaire.getText());
 					
-					ps.executeUpdate();
+					
+					
+				
+					 int rowsAffected = ps.executeUpdate();
+	                    
+	                    if (rowsAffected == 1) {
+	                        ResultSet generatedKeys = ps.getGeneratedKeys();
+	                        if (generatedKeys.next()) {
+	                            int idUtilisateur = generatedKeys.getInt(1);
+	                            // Ouvrir la fenêtre InfoMed en passant l'ID utilisateur
+	                            
+	                            if (rdbtnmed.isSelected()) {
+	                            InfoMed infodoc = new InfoMed(idUtilisateur);
+	                            infodoc.setVisible(true);}
+	                            else      if (rdbtnSecraitaire.isSelected()) {
+	    	                        InfoSecraitaire infoSecretaire = new InfoSecraitaire(idUtilisateur);
+	    	                        infoSecretaire.setVisible(true);
+	    	                    }
+	                        } else {
+	                            System.out.println("Aucune clé générée n'a été récupérée.");
+	                        }
+	                    } else {
+	                        System.out.println("L'insertion a échoué ou aucune ligne n'a été affectée.");
+	                    }
+		            
+	               
+		            
+					
+					
 					 
 					 txtutilisateur.setText("");
 					    passwordComp.setText("");
 					    rdbtnmed.setSelected(false);
 					    rdbtnSecraitaire.setSelected(false);
+					    
+					    
+		
+					        
+					     
+					    
+					    
+				
+					    
 					 
 					    
 					
