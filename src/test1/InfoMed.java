@@ -156,7 +156,7 @@ public class InfoMed extends JFrame {
 				 
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","lydia");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3307/cabinetmedical","root","kawter55");
 					String query="insert into medecin (nom, Prénom,email,numtel, adresse,spécialité) values (?,?,?,?,?,?)";
 					
 					String nommed = Nommedtxt.getText ();
