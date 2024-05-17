@@ -101,7 +101,7 @@ public class Compte extends JFrame {
 				
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cabinetmedical","root","koukikouki");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3307/cabinetmedical","root","kawter55");
 					String query="insert into createcompte (Nomutilisateur, Motdepasse, TypeUtilisateur) values (?,?,?)";
 					PreparedStatement ps=con.prepareStatement(query);
 					ps.setString(1, txtutilisateur.getText());
